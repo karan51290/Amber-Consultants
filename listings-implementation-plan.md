@@ -28,8 +28,23 @@ Turns out Sanity's built-in Studio hosting doesn't support custom domains on *an
 - **No CNAME needed** — don't add the `admin.amberconsultants.in` DNS record we discussed earlier, it wouldn't have worked against `*.sanity.studio` anyway.
 - Studio stays at **https://amber-consultants.sanity.studio/**.
 
+**CORS origins for production added**: `https://new.amberconsultants.in`, `https://amberconsultants.in`, and `https://www.amberconsultants.in` (bonus, in case that variant gets used) are all registered — `listings.html` will work once deployed to either domain.
+
+**Business details centralized (`site/business.json`)**
+Single source of truth for name, tagline, address, phone/landline, WhatsApp number + message, email, hours, social links, Sanity Studio URL, and the footer's "designed by" credit. `build.py` loads it at build time and:
+- Injects it into the shared header/footer (`render_shell`) directly.
+- Replaces `{{TOKEN}}` placeholders (`{{WHATSAPP_URL}}`, `{{PHONE}}`, `{{LANDLINE}}`, `{{EMAIL}}`, `{{ADDRESS}}`, `{{HOURS}}`, `{{MAPS_QUERY}}`) inside page fragments (`pages/contact.html`'s info cards + map embed, `pages/home.html`'s mid-page CTA) that used to hardcode these values.
+- Generates `site/js/business-config.js` (a plain `window.AMBER_BUSINESS = {...}` script, not a runtime JSON fetch — works identically on `file://`, a local server, and GitHub Pages) so `listings.js` (WhatsApp number) and `main.js` (contact-form mailto) read the same values instead of their own hardcoded copies.
+- **To update business details later**: edit `site/business.json`, re-run `python3 build.py`, done — everywhere it's used updates automatically.
+
+**"Admin" link added to the header**
+A small, low-key text link (`.admin-link`, styled subtly — muted color, underline, not a button) pointing at `business.json`'s `sanityStudioUrl`, in both the desktop nav-cta row and the mobile sheet.
+
+**Pushed to GitHub**: https://github.com/karan51290/Amber-Consultants (public repo).
+- Note: a repo with this name already existed from an earlier, unrelated Vite/TypeScript attempt at the site. Rather than delete it, it's archived at https://github.com/karan51290/Amber-Consultants-archived-2026-07-14 so nothing was lost, and the new static-site + Sanity codebase now lives at the `Amber-Consultants` name instead.
+- `.gitignore` at the project root excludes `node_modules/`, the Obsidian vault symlink, `backup/`, `.claude/`, and Studio's build/cache dirs.
+
 **Not done yet — needs a decision/access only you have:**
-- **Adding a CORS origin for wherever the site ends up hosted in production** (e.g. your final GitHub Pages URL or custom domain) — needed before `listings.html` will work live, same reason as the local CORS fix above. Run `npx sanity cors add <your production URL> --no-credentials` once that URL is known, or tell me the URL and I'll add it.
 - **Inviting the client as a Studio editor** — needs their email address. Once you give me it, I can invite them via the Sanity management API, or you can do it yourself at sanity.io/manage → Project → Members → Invite.
 - Replace the 3 test listings with real ones once the client is onboarded (or leave them as a working demo in the meantime).
 
