@@ -292,16 +292,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .nav-cta { display: flex; align-items: center; gap: 10px; }
 .admin-link {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 2px;
   white-space: nowrap;
 }
-.admin-link:hover { color: var(--amber-deep); }
-.admin-link-mobile { display: block; text-align: center; margin-top: 14px; }
-@media (max-width: 900px) { .nav-cta .admin-link { display: none; } }
+.admin-link:hover { color: var(--amber-soft); }
 .nav-toggle {
   display: none;
   background: none;

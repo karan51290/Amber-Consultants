@@ -111,7 +111,6 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
       {nav_desktop}
     </nav>
     <div class="nav-cta">
-      <a href="{BUSINESS['sanityStudioUrl']}" target="_blank" rel="noopener" class="admin-link">Admin</a>
       <a href="{WHATSAPP_URL}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Chat with Us</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span>
@@ -130,7 +129,6 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
     {nav_mobile}
   </ul>
   <a href="{WHATSAPP_URL}" target="_blank" rel="noopener" class="btn btn-primary btn-block" style="margin-top:24px;">Chat with Us</a>
-  <a href="{BUSINESS['sanityStudioUrl']}" target="_blank" rel="noopener" class="admin-link admin-link-mobile">Admin</a>
 </aside>
 
 <main id="main">
@@ -185,6 +183,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
     <div class="footer-bottom">
       <span>© {BUSINESS['copyrightYear']} {BUSINESS['name']}. {BUSINESS['tagline']}.</span>
       <span>Website Designed by <a href="{BUSINESS['designedBy']['url']}" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">{BUSINESS['designedBy']['name']}</a></span>
+      <a href="{BUSINESS['sanityStudioUrl']}" target="_blank" rel="noopener" class="admin-link" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">Admin</a>
     </div>
   </div>
 </footer>
