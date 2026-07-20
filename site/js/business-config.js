@@ -1,0 +1,24 @@
+// Auto-generated from business.json by build.py — do not edit directly.
+window.AMBER_BUSINESS = {
+  "name": "Amber Consultants",
+  "tagline": "Complete Property Solutions",
+  "address": "No.22, Shanmuganar Salai, Choolaimedu, Chennai - 600 094",
+  "googleMapsQuery": "No.22,+Shanmuganar+Salai,+Choolaimedu,+Chennai+600094",
+  "phone": "+91 96771 95239",
+  "landline": "044-4352 8945",
+  "whatsappNumber": "919677195239",
+  "whatsappMessage": "Hi Amber Consultants, I'd like to know more",
+  "email": "care@amberconsultants.in",
+  "hours": "Mon\u2013Sat, 9:00 AM \u2013 7:00 PM",
+  "social": {
+    "facebook": "https://www.facebook.com/share/1B9r8QbCzq/",
+    "instagram": "https://www.instagram.com/amberconsultants.123",
+    "linkedin": "https://www.linkedin.com/in/amber-consultants-68a04a348/"
+  },
+  "sanityStudioUrl": "https://amber-consultants.sanity.studio/",
+  "designedBy": {
+    "name": "Zolo Innovations",
+    "url": "https://zoloinnovations.com"
+  },
+  "copyrightYear": 2026
+};

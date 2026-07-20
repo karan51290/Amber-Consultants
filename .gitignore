@@ -1,0 +1,17 @@
+# Not part of the website project
+Amber Consultants Obsidian
+backup/
+.claude/
+
+# Dependencies
+node_modules/
+
+# Sanity Studio build/cache
+studio/dist/
+studio/.sanity/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log
+.vscode/

@@ -1,0 +1,75 @@
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="home.html">Home</a><span>/</span><span>Contact Us</span></div>
+    <span class="eyebrow">Let's Stay In Touch</span>
+    <h1 class="h-display" style="margin-top:12px;">Get in Touch</h1>
+    <p class="lede">Contact us today to learn more about how we can help with your residential and commercial property needs.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="contact-info-grid">
+      <div class="contact-info-card">
+        <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h4>Work Hours</h4>
+        <p>{{HOURS}}</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m3 6 9 7 9-7" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h4>Email Address</h4>
+        <p>{{EMAIL}}</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.5 22 2 14.5 2 7a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h4>Phone</h4>
+        <p>{{PHONE}}<br>{{LANDLINE}}</p>
+      </div>
+      <div class="contact-info-card">
+        <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.2 7-12A7 7 0 1 0 5 10c0 5.8 7 12 7 12z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h4>Address</h4>
+        <p>{{ADDRESS}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <div class="form-card">
+        <h2 class="h-md" style="margin-bottom:6px;">Send us a message</h2>
+        <p class="muted" style="margin-bottom:24px;">We'll get back to you within one business day.</p>
+        <form id="contact-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell us about your property or project…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+        </form>
+      </div>
+      <div>
+        <div class="map-frame" style="margin-bottom:20px;">
+          <iframe src="https://www.google.com/maps?q={{MAPS_QUERY}}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Amber Consultants location"></iframe>
+        </div>
+        <div class="feature-card">
+          <h4>Prefer to chat?</h4>
+          <p>Message us directly on WhatsApp for the fastest response — most enquiries are answered the same day.</p>
+          <a href="{{WHATSAPP_URL}}" target="_blank" rel="noopener" class="btn btn-primary" style="align-self:flex-start; margin-top:6px;">Chat with Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
