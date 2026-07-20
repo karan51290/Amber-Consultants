@@ -44,6 +44,13 @@ A small, low-key text link (`.admin-link`, styled subtly — muted color, underl
 - Note: a repo with this name already existed from an earlier, unrelated Vite/TypeScript attempt at the site. Rather than delete it, it's archived at https://github.com/karan51290/Amber-Consultants-archived-2026-07-14 so nothing was lost, and the new static-site + Sanity codebase now lives at the `Amber-Consultants` name instead.
 - `.gitignore` at the project root excludes `node_modules/`, the Obsidian vault symlink, `backup/`, `.claude/`, and Studio's build/cache dirs.
 
+**GitHub Pages deployment — fixed the "index.html must be at repo root" problem**
+GitHub Pages' legacy branch-based deploy only serves from repo root (or `/docs`), but the actual site lives in `site/`, alongside `studio/` and project docs — moving everything to root would've made a mess of the repo. Instead:
+- Added `.github/workflows/deploy-pages.yml`, which publishes the `site/` subfolder as the Pages artifact directly (`actions/upload-pages-artifact` with `path: site`, then `actions/deploy-pages`) — no file moves needed, repo structure stays as-is.
+- Switched the repo's Pages build type from `legacy` to `workflow` via the API (`gh api repos/.../pages -X PUT -f build_type=workflow`).
+- You'd already added a `CNAME` file at repo root with the custom domain (`new.amberconsultants.in`) via the Settings UI — copied it into `site/CNAME` too, since with the `workflow` build type, `site/` (not repo root) is what actually gets published, and confirmed the custom-domain HTTPS cert survived the build-type switch.
+- **Verified live**: https://new.amberconsultants.in/ returns 200 and serves the correct homepage.
+
 **Not done yet — needs a decision/access only you have:**
 - **Inviting the client as a Studio editor** — needs their email address. Once you give me it, I can invite them via the Sanity management API, or you can do it yourself at sanity.io/manage → Project → Members → Invite.
 - Replace the 3 test listings with real ones once the client is onboarded (or leave them as a working demo in the meantime).
