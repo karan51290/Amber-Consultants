@@ -13,7 +13,7 @@
   var WHATSAPP_NUMBER = BIZ.whatsappNumber || "919677195239";
 
   var QUERY = '*[_type == "listing" && status == "available"] | order(featured desc, publishedAt desc){' +
-    "title, slug, price, priceLabel, locality, propertyType, bedrooms, bathrooms, areaSqft, images, featured" +
+    "title, slug, price, priceLabel, locality, listingCategory, propertyType, bedrooms, bathrooms, areaSqft, images, featured" +
     "}";
 
   function apiUrl(query) {
@@ -100,8 +100,19 @@
     if (el) el.hidden = !visible;
   }
 
+  function renderSection(sectionId, gridId, listings) {
+    var section = document.getElementById(sectionId);
+    var grid = document.getElementById(gridId);
+    if (!section || !grid) return;
+    if (!listings.length) {
+      section.hidden = true;
+      return;
+    }
+    section.hidden = false;
+    grid.innerHTML = listings.map(cardHtml).join("");
+  }
+
   function renderListings(listings) {
-    var grid = document.getElementById("listings-grid");
     showLoading(false);
 
     if (!listings.length) {
@@ -110,8 +121,10 @@
     }
 
     showEmptyState(false);
-    grid.innerHTML = listings.map(cardHtml).join("");
-    grid.hidden = false;
+    var forSale = listings.filter(function (l) { return l.listingCategory !== "rent"; });
+    var forRent = listings.filter(function (l) { return l.listingCategory === "rent"; });
+    renderSection("listings-for-sale", "listings-for-sale-grid", forSale);
+    renderSection("listings-for-rent", "listings-for-rent-grid", forRent);
   }
 
   function showFallback(err) {
@@ -121,7 +134,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    if (!document.getElementById("listings-grid")) return; // only run on listings.html
+    if (!document.getElementById("listings-loading")) return; // only run on listings.html
     fetchListings().then(renderListings).catch(showFallback);
   });
 })();

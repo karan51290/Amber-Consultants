@@ -11,7 +11,21 @@
   <div class="container">
     <p id="listings-loading" class="muted" style="text-align:center;">Loading listings…</p>
 
-    <div id="listings-grid" class="listings-grid" hidden></div>
+    <section id="listings-for-sale" hidden>
+      <div class="section-head listings-section-head">
+        <span class="eyebrow">Buy</span>
+        <h2 class="h-xl">For Sale</h2>
+      </div>
+      <div id="listings-for-sale-grid" class="listings-grid"></div>
+    </section>
+
+    <section id="listings-for-rent" hidden style="margin-top:56px;">
+      <div class="section-head listings-section-head">
+        <span class="eyebrow">Rent</span>
+        <h2 class="h-xl">For Rent</h2>
+      </div>
+      <div id="listings-for-rent-grid" class="listings-grid"></div>
+    </section>
 
     <div id="listings-empty-state" class="empty-state" hidden>
       <div class="icon-wrap">
@@ -22,6 +36,20 @@
       <div class="hero-actions" style="justify-content:center; margin-top:24px;">
         <a href="contact.html" class="btn btn-primary">Tell Us What You Need</a>
         <a href="real-estate.html" class="btn btn-secondary">Explore Real Estate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2 class="h-lg">Want to list your own property?</h2>
+        <p>Whether you're selling or renting it out, tell us about it and we'll take care of the rest.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="sell.html" class="btn btn-primary">Sell / Rent Your Property</a>
       </div>
     </div>
   </div>

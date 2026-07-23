@@ -5,6 +5,7 @@ Source of truth for header/footer/nav lives here so all 8 pages stay in sync.
 """
 import json
 import os
+import re
 import urllib.parse
 
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -13,14 +14,15 @@ PAGES_DIR = os.path.join(SITE_DIR, "pages")
 NAV_ITEMS = [
     ("home", "Home", "home.html", None),
     ("about", "About Us", "about.html", None),
-    ("services", "Services", "index.html", [
+    ("services", "Services", "services.html", [
         ("property-management.html", "Property Management"),
-        ("interior-design.html", "Interior Design"),
         ("real-estate.html", "Real Estate"),
+        ("renovation-repairs.html", "Renovation & Repairs"),
+        ("interior-design.html", "Interior Design"),
     ]),
     ("gallery", "Gallery", "gallery.html", None),
     ("listings", "Listings", "listings.html", None),
-    ("contact", "Contact Us", "contact.html", None),
+    ("sell", "Sell/Rent", "sell.html", None),
 ]
 
 # Single source of truth for business details — edit business.json and re-run
@@ -34,12 +36,25 @@ WHATSAPP_URL = (
     "&text=" + urllib.parse.quote_plus(BUSINESS["whatsappMessage"])
 )
 
+def tel_href(number):
+    """Turns a display phone/landline string into a dialable tel: target."""
+    digits = re.sub(r"[^\d+]", "", number)
+    if digits.startswith("0"):
+        digits = "+91" + digits[1:]
+    elif not digits.startswith("+"):
+        digits = "+91" + digits
+    return digits
+
+PHONE_TEL = tel_href(BUSINESS["phone"])
+LANDLINE_TEL = tel_href(BUSINESS["landline"])
+
 # Tokens usable inside pages/*.html fragments — replaced at build time.
 FRAGMENT_TOKENS = {
     "{{WHATSAPP_URL}}": WHATSAPP_URL,
-    "{{PHONE}}": BUSINESS["phone"],
-    "{{LANDLINE}}": BUSINESS["landline"],
-    "{{EMAIL}}": BUSINESS["email"],
+    "{{PHONE_TEL}}": PHONE_TEL,
+    "{{PHONE}}": f'<a href="tel:{PHONE_TEL}">{BUSINESS["phone"]}</a>',
+    "{{LANDLINE}}": f'<a href="tel:{LANDLINE_TEL}">{BUSINESS["landline"]}</a>',
+    "{{EMAIL}}": f'<a href="mailto:{BUSINESS["email"]}">{BUSINESS["email"]}</a>',
     "{{ADDRESS}}": BUSINESS["address"],
     "{{HOURS}}": BUSINESS["hours"],
     "{{MAPS_QUERY}}": BUSINESS["googleMapsQuery"],
@@ -111,7 +126,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
       {nav_desktop}
     </nav>
     <div class="nav-cta">
-      <a href="{WHATSAPP_URL}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Chat with Us</a>
+      <a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span>
       </button>
@@ -122,13 +137,13 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
 <div class="sheet-backdrop"></div>
 <aside class="mobile-sheet">
   <div class="mobile-sheet-header">
-    <img src="assets/logos/logo-header.png" alt="Amber Consultants" style="height:34px;">
+    <img src="assets/logos/logo-header.png" alt="Amber Consultants" style="height:42px;">
     <button class="nav-toggle" aria-label="Close menu"><span></span></button>
   </div>
   <ul>
     {nav_mobile}
   </ul>
-  <a href="{WHATSAPP_URL}" target="_blank" rel="noopener" class="btn btn-primary btn-block" style="margin-top:24px;">Chat with Us</a>
+  <a href="contact.html" class="btn btn-primary btn-block" style="margin-top:24px;">Contact Us</a>
 </aside>
 
 <main id="main">
@@ -140,7 +155,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="assets/logos/logo-white.png" alt="Amber Consultants" style="border-radius:8px;">
-        <p>Complete property solutions for NRI and non-local owners — property management, interior design, and real estate, handled end to end from Chennai.</p>
+        <p>Property management, real estate, renovation and repairs, and interior design for NRI and non-local owners - handled end to end from Chennai.</p>
         <div class="social-row">
           <a class="social-icon" href="{BUSINESS['social']['facebook']}" target="_blank" rel="noopener" aria-label="Facebook">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2.5V5.3c-.43-.06-1.9-.18-3.6-.18-3.57 0-6 2.24-6 6.35V15H4.5v3.6H7.9V24h3.7v-5.4h3.4l.5-3.6h-3.9v-3.05c0-1.05.3-1.75 1.8-1.75z" fill="currentColor"/></svg>
@@ -166,16 +181,17 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
         <h5>Services</h5>
         <ul>
           <li><a href="property-management.html">Property Management</a></li>
-          <li><a href="interior-design.html">Interior Design</a></li>
           <li><a href="real-estate.html">Real Estate</a></li>
+          <li><a href="renovation-repairs.html">Renovation &amp; Repairs</a></li>
+          <li><a href="interior-design.html">Interior Design</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Contact</h5>
         <ul class="footer-contact">
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.2 7-12A7 7 0 1 0 5 10c0 5.8 7 12 7 12z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>{BUSINESS['address']}</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.5 22 2 14.5 2 7a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.6"/></svg>{BUSINESS['phone']}</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m3 6 9 7 9-7" stroke="currentColor" stroke-width="1.6"/></svg>{BUSINESS['email']}</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.5 22 2 14.5 2 7a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.6"/></svg><a href="tel:{PHONE_TEL}" style="color:inherit;">{BUSINESS['phone']}</a></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m3 6 9 7 9-7" stroke="currentColor" stroke-width="1.6"/></svg><a href="mailto:{BUSINESS['email']}" style="color:inherit;">{BUSINESS['email']}</a></li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>{BUSINESS['hours']}</li>
         </ul>
       </div>
@@ -206,39 +222,18 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
 """
 
 PAGES = [
-    ("home.html", "Home", "Property management, interior design, and real estate — complete property solutions for NRI and non-local owners in Chennai.", "home"),
-    ("about.html", "About Us", "Meet Amber Consultants — your trusted partner for NRI and non-local property management in Chennai.", "about"),
+    ("home.html", "Home", "Property management, interior design, real estate, and renovation - complete property solutions for NRI and non-local owners in Chennai.", "home"),
+    ("about.html", "About Us", "Meet Amber Consultants - your trusted partner for NRI and non-local property management in Chennai.", "about"),
+    ("services.html", "Services", "Amber Consultants - property management, real estate, renovation and repairs, and interior design. Choose a service to get started.", "services"),
     ("property-management.html", "Property Management", "End-to-end rental property management: tenant screening, lease management, maintenance, and financial reporting.", "services"),
-    ("interior-design.html", "Interior Design", "Residential and commercial interior design in Chennai — modular kitchens, renovations, and complete home transformations.", "services"),
     ("real-estate.html", "Real Estate", "Buy, sell, and rent residential and commercial property in Chennai with expert guidance from Amber Consultants.", "services"),
+    ("renovation-repairs.html", "Renovation & Repairs", "Painting, electrical, plumbing, and full renovation work for homes and commercial spaces in Chennai.", "services"),
+    ("interior-design.html", "Interior Design", "Residential and commercial interior design in Chennai - modular kitchens, renovations, and complete home transformations.", "services"),
     ("gallery.html", "Gallery", "A look at Amber Consultants' interior design and property work.", "gallery"),
-    ("listings.html", "Listings", "Property listings from Amber Consultants — coming soon.", "listings"),
-    ("contact.html", "Contact Us", "Get in touch with Amber Consultants — call, WhatsApp, or send us your property management enquiry.", "contact"),
+    ("listings.html", "Listings", "Property listings from Amber Consultants - browse properties for sale and for rent.", "listings"),
+    ("sell.html", "Sell / Rent Your Property", "List your property with Amber Consultants - tell us about it and we'll help you sell or rent it.", "sell"),
+    ("contact.html", "Contact Us", "Get in touch with Amber Consultants - call, WhatsApp, or send us your property management enquiry.", "contact"),
 ]
-
-def render_bare(title, description, body):
-    """A chrome-less shell for the Services gateway homepage: no header, no footer, no nav."""
-    return f"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} | Amber Consultants</title>
-<meta name="description" content="{description}">
-<link rel="icon" href="assets/logos/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-{body}
-<a href="{WHATSAPP_URL}" target="_blank" rel="noopener" class="whatsapp-fab" aria-label="Chat with Amber Consultants on WhatsApp">
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.098-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.437-9.884 9.889-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.36.101 11.943c0 2.105.549 4.161 1.595 5.976L0 24l6.235-1.635a11.94 11.94 0 0 0 5.71 1.454h.005c6.582 0 11.941-5.36 11.944-11.943a11.876 11.876 0 0 0-3.374-8.421" fill="white"/></svg>
-</a>
-</body>
-</html>
-"""
 
 def write_business_config():
     """Generates js/business-config.js from business.json so client-side
@@ -264,19 +259,14 @@ def main():
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(html)
         print("built", filename)
+        if filename == "home.html":
+            home_html = html
 
-    # Bare Services gateway page — the site's homepage, no header/footer.
-    gateway_frag = os.path.join(PAGES_DIR, "gateway.html")
-    with open(gateway_frag, encoding="utf-8") as f:
-        gateway_body = f.read()
-    gateway_html = render_bare(
-        "Services",
-        "Amber Consultants — property management, interior design, and real estate. Choose a service to get started.",
-        gateway_body,
-    )
+    # The domain root mirrors the Home page in full (chrome and nav intact),
+    # not a separate chrome-less splash.
     with open(os.path.join(SITE_DIR, "index.html"), "w", encoding="utf-8") as f:
-        f.write(gateway_html)
-    print("built index.html (bare gateway)")
+        f.write(home_html)
+    print("built index.html (mirrors home.html)")
 
 if __name__ == "__main__":
     main()

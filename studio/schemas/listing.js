@@ -35,6 +35,18 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "listingCategory",
+      title: "Category",
+      type: "string",
+      options: {
+        list: [
+          {title: "Sale", value: "sale"},
+          {title: "Rent", value: "rent"},
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "propertyType",
       title: "Property Type",
       type: "string",

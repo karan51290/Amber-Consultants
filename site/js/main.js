@@ -78,7 +78,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---- Contact form: compose a mailto: with the entered details ---- */
+  /* ---- Sends a form's fields to WhatsApp as a pre-filled message ---- */
+  function sendToWhatsApp(text) {
+    var waNumber = (window.AMBER_BUSINESS && window.AMBER_BUSINESS.whatsappNumber) || '919677195239';
+    window.open('https://api.whatsapp.com/send/?phone=' + waNumber + '&text=' + encodeURIComponent(text), '_blank', 'noopener');
+  }
+
+  /* ---- Contact form: compose a WhatsApp message with the entered details ---- */
   var contactForm = document.querySelector('#contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
@@ -87,15 +93,34 @@ document.addEventListener('DOMContentLoaded', function () {
       var email = contactForm.email.value.trim();
       var phone = contactForm.phone.value.trim();
       var message = contactForm.message.value.trim();
-      var subject = encodeURIComponent('Website enquiry from ' + (name || 'website visitor'));
-      var body = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Phone: ' + phone + '\n\n' +
-        message
+      sendToWhatsApp(
+        'Hi Amber Consultants, my name is ' + name + '.\n' +
+        'Phone: ' + phone + '\n' +
+        (email ? 'Email: ' + email + '\n' : '') +
+        '\n' + message
       );
-      var contactEmail = (window.AMBER_BUSINESS && window.AMBER_BUSINESS.email) || 'care@amberconsultants.in';
-      window.location.href = 'mailto:' + contactEmail + '?subject=' + subject + '&body=' + body;
+    });
+  }
+
+  /* ---- Sell/Rent form: compose a WhatsApp message with the entered details ---- */
+  var sellForm = document.querySelector('#sell-form');
+  if (sellForm) {
+    sellForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = sellForm.name.value.trim();
+      var phone = sellForm.phone.value.trim();
+      var locality = sellForm.locality.value.trim();
+      var category = sellForm.category.value;
+      var price = sellForm.price.value.trim();
+      var description = sellForm.description.value.trim();
+      sendToWhatsApp(
+        "Hi Amber Consultants, I'd like to " + category.toLowerCase() + ' my property.\n' +
+        'Name: ' + name + '\n' +
+        'Phone: ' + phone + '\n' +
+        'Location: ' + locality + '\n' +
+        (price ? 'Expected Price/Rent: ' + price + '\n' : '') +
+        (description ? '\n' + description : '')
+      );
     });
   }
 });

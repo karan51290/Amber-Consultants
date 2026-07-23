@@ -120,7 +120,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .lede { font-size: 1.15rem; color: var(--body-strong); line-height: 1.6; }
 .muted { color: var(--muted); }
-.on-navy .eyebrow, .on-navy .eyebrow::before { color: var(--amber-soft); background: var(--amber-soft); }
+.on-navy .eyebrow { color: var(--amber-soft); }
+.on-navy .eyebrow::before { background: var(--amber-soft); }
+.on-navy .lede { color: var(--on-navy-soft); }
 
 /* ---- Layout ---- */
 .container {
@@ -245,7 +247,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   justify-content: space-between;
   height: 84px;
 }
-.brand-mark img { height: 46px; width: auto; }
+.brand-mark img { height: 58px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links > li { position: relative; }
 .nav-link {
@@ -321,7 +323,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .nav-links, .nav-cta .btn-secondary { display: none; }
   .nav-toggle { display: flex; }
   .nav-row { height: 72px; }
-  .brand-mark img { height: 38px; }
+  .brand-mark img { height: 48px; }
 
   body.nav-open .mobile-sheet { transform: translateX(0); }
   .mobile-sheet {
@@ -439,13 +441,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   gap: 14px;
 }
 .feature-card .icon-wrap {
-  width: 56px; height: 56px;
+  width: 64px; height: 64px;
   border-radius: var(--r-md);
   background: var(--cream-white);
+  color: var(--amber-deep);
   display: flex; align-items: center; justify-content: center;
-  padding: 10px;
+  padding: 12px;
 }
 .feature-card .icon-wrap img { width: 100%; height: 100%; object-fit: contain; }
+.feature-card .icon-wrap svg { width: 100%; height: 100%; }
 .feature-card h4 { font-size: 1.08rem; }
 .feature-card p { margin: 0; color: var(--body); font-size: 0.95rem; }
 
@@ -460,6 +464,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border: 1px solid var(--hairline-on-navy);
 }
 .feature-card-dark h4 { color: var(--on-navy); }
+.feature-card-dark p { color: var(--on-navy); font-weight: 500; }
 .feature-card-dark .icon-wrap {
   width: 52px; height: 52px; border-radius: var(--r-md);
   background: rgba(255,253,249,0.08);
@@ -664,6 +669,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .map-frame iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
 
 /* ---- Listings ---- */
+.listings-section-head {
+  margin-bottom: var(--sp-xl);
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--hairline);
+}
+.listings-section-head h2 { color: var(--navy); }
 .listings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -742,38 +753,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition: transform .18s ease;
 }
 .whatsapp-fab:hover { transform: scale(1.07); }
-
-/* ---- Services gateway (chrome-less homepage) ---- */
-.gateway-shell {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 72px 0;
-  background: var(--canvas);
-  position: relative;
-  overflow: hidden;
-}
-.gateway-shell::before {
-  content: "";
-  position: absolute;
-  top: -100px; left: 50%;
-  transform: translateX(-50%);
-  width: 900px; height: 500px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Cpath d='M10 90 L100 10 L190 90' fill='none' stroke='%23E3D6BE' stroke-width='2'/%3E%3C/svg%3E") no-repeat center / contain;
-  opacity: 0.6;
-  pointer-events: none;
-}
-.gateway-header { text-align: center; position: relative; z-index: 1; }
-.gateway-logo { height: 64px; margin: 0 auto 22px; }
-.gateway-header .eyebrow { justify-content: center; }
-.gateway-header h1 { margin-top: 14px; }
-.gateway-header .lede { margin: 14px auto 0; max-width: 52ch; }
-.gateway-grid { position: relative; z-index: 1; margin-top: 56px; }
-.gateway-footer-link { text-align: center; margin-top: 52px; position: relative; z-index: 1; }
-@media (max-width: 640px) {
-  .gateway-shell { padding: 48px 0; }
-  .gateway-logo { height: 48px; }
-}
 
 /* ---- Testimonial cards (home page) ---- */
 .testimonial-card {
