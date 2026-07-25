@@ -15,3 +15,5 @@ studio/.sanity/
 Thumbs.db
 *.log
 .vscode/
+
+reference/
