@@ -17,7 +17,7 @@ NAV_ITEMS = [
     ("services", "Services", "services.html", [
         ("property-management.html", "Property Management"),
         ("real-estate.html", "Real Estate"),
-        ("renovation-repairs.html", "Renovation & Repairs"),
+        ("renovation-repairs.html", "Building Renovation"),
         ("interior-design.html", "Interior Design"),
     ]),
     ("gallery", "Gallery", "gallery.html", None),
@@ -120,7 +120,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
 <header class="site-header">
   <div class="container nav-row">
     <a href="home.html" class="brand-mark" aria-label="Amber Consultants home">
-      <img src="assets/logos/logo-header.png" alt="Amber Consultants">
+      <img src="assets/logos/logo-primary-horizontal.png" alt="Amber Consultants">
     </a>
     <nav aria-label="Primary">
       {nav_desktop}
@@ -137,7 +137,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
 <div class="sheet-backdrop"></div>
 <aside class="mobile-sheet">
   <div class="mobile-sheet-header">
-    <img src="assets/logos/logo-header.png" alt="Amber Consultants" style="height:42px;">
+    <img src="assets/logos/logo-primary-horizontal.png" alt="Amber Consultants" style="height:64px;">
     <button class="nav-toggle" aria-label="Close menu"><span></span></button>
   </div>
   <ul>
@@ -155,7 +155,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="assets/logos/logo-white.png" alt="Amber Consultants" style="border-radius:8px;">
-        <p>Property management, real estate, renovation and repairs, and interior design for NRI and non-local owners - handled end to end from Chennai.</p>
+        <p>Property Management, Real Estate, Building Renovation, and Interior Design under one roof - delivered end to end from Chennai.</p>
         <div class="social-row">
           <a class="social-icon" href="{BUSINESS['social']['facebook']}" target="_blank" rel="noopener" aria-label="Facebook">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2.5V5.3c-.43-.06-1.9-.18-3.6-.18-3.57 0-6 2.24-6 6.35V15H4.5v3.6H7.9V24h3.7v-5.4h3.4l.5-3.6h-3.9v-3.05c0-1.05.3-1.75 1.8-1.75z" fill="currentColor"/></svg>
@@ -182,7 +182,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
         <ul>
           <li><a href="property-management.html">Property Management</a></li>
           <li><a href="real-estate.html">Real Estate</a></li>
-          <li><a href="renovation-repairs.html">Renovation &amp; Repairs</a></li>
+          <li><a href="renovation-repairs.html">Building Renovation</a></li>
           <li><a href="interior-design.html">Interior Design</a></li>
         </ul>
       </div>
@@ -227,7 +227,7 @@ PAGES = [
     ("services.html", "Services", "Amber Consultants - property management, real estate, renovation and repairs, and interior design. Choose a service to get started.", "services"),
     ("property-management.html", "Property Management", "End-to-end rental property management: tenant screening, lease management, maintenance, and financial reporting.", "services"),
     ("real-estate.html", "Real Estate", "Buy, sell, and rent residential and commercial property in Chennai with expert guidance from Amber Consultants.", "services"),
-    ("renovation-repairs.html", "Renovation & Repairs", "Painting, electrical, plumbing, and full renovation work for homes and commercial spaces in Chennai.", "services"),
+    ("renovation-repairs.html", "Building Renovation", "Painting, electrical, plumbing, and full renovation work for homes and commercial spaces in Chennai.", "services"),
     ("interior-design.html", "Interior Design", "Residential and commercial interior design in Chennai - modular kitchens, renovations, and complete home transformations.", "services"),
     ("gallery.html", "Gallery", "A look at Amber Consultants' interior design and property work.", "gallery"),
     ("listings.html", "Listings", "Property listings from Amber Consultants - browse properties for sale and for rent.", "listings"),
