@@ -505,7 +505,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 /* ---- Highlight band (value-prop checklist band) ---- */
-.highlight-band { background: var(--amber-deep); border-radius: var(--r-xl); padding: 56px 48px; }
+.highlight-band { background: var(--navy); border-radius: var(--r-xl); padding: 56px 48px; }
 .highlight-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 32px; margin-top: 32px; }
 .highlight-item { display: flex; align-items: center; gap: 12px; color: var(--on-amber); font-weight: 600; font-size: 1.05rem; }
 .check-badge {
@@ -552,7 +552,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .category-item h4 { margin-bottom: 8px; }
 .category-item ul { display: flex; flex-direction: column; gap: 6px; }
 .category-item ul li { font-size: 0.96rem; color: var(--body); position: relative; padding-left: 18px; }
-.category-item ul li::before { content: "—"; position: absolute; left: 0; color: var(--amber-deep); }
+.category-item ul li::before { content: "•"; position: absolute; left: 0; color: var(--amber-deep); }
 
 /* ---- Accordion ---- */
 .accordion { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--hairline); background: var(--cream-white); }
@@ -653,18 +653,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .lightbox-next { right: 24px; top: 50%; transform: translateY(-50%); }
 
 /* ---- Contact page ---- */
-.contact-info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-lg); }
+.contact-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-lg); }
 .contact-info-card {
   background: var(--cream-white); border: 1px solid var(--hairline); border-radius: var(--r-lg);
-  padding: 26px 22px; text-align: left;
+  padding: 36px 30px; text-align: left;
 }
 .contact-info-card .icon-wrap {
-  width: 44px; height: 44px; border-radius: 50%;
+  width: 52px; height: 52px; border-radius: 50%;
   background: var(--amber-wash); color: var(--amber-deep);
-  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
 }
-.contact-info-card h4 { font-size: 1rem; margin-bottom: 4px; }
-.contact-info-card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.contact-info-card h4 { font-size: 1.1rem; margin-bottom: 6px; }
+.contact-info-card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
 @media (max-width: 860px) { .contact-info-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .contact-info-grid { grid-template-columns: 1fr; } }
 
