@@ -504,6 +504,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .cta-band { padding: 40px 26px; text-align: center; justify-content: center; }
 }
 
+/* ---- Highlight band (value-prop checklist band) ---- */
+.highlight-band { background: var(--amber-deep); border-radius: var(--r-xl); padding: 56px 48px; }
+.highlight-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 32px; margin-top: 32px; }
+.highlight-item { display: flex; align-items: center; gap: 12px; color: var(--on-amber); font-weight: 600; font-size: 1.05rem; }
+.check-badge {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,253,249,0.18); color: var(--on-amber);
+  display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 640px) {
+  .highlight-band { padding: 40px 24px; }
+  .highlight-item { font-size: 0.95rem; }
+}
+
 /* ---- Badge ---- */
 .badge {
   display: inline-flex; align-items: center; gap: 6px;
@@ -531,6 +545,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .step ul { display: flex; flex-direction: column; gap: 6px; }
 .step ul li { font-size: 0.96rem; color: var(--body); position: relative; padding-left: 18px; }
 .step ul li::before { content: "—"; position: absolute; left: 0; color: var(--amber-deep); }
+
+/* ---- Category list (unnumbered — grouped bullet lists) ---- */
+.category-item { padding: 26px 0; border-top: 1px solid var(--hairline); }
+.category-item:first-child { border-top: none; }
+.category-item h4 { margin-bottom: 8px; }
+.category-item ul { display: flex; flex-direction: column; gap: 6px; }
+.category-item ul li { font-size: 0.96rem; color: var(--body); position: relative; padding-left: 18px; }
+.category-item ul li::before { content: "—"; position: absolute; left: 0; color: var(--amber-deep); }
 
 /* ---- Accordion ---- */
 .accordion { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--hairline); background: var(--cream-white); }
@@ -652,13 +674,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .form-card { background: var(--cream-white); border: 1px solid var(--hairline); border-radius: var(--r-lg); padding: var(--sp-xl); }
 .field { margin-bottom: 18px; }
 .field label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--body-strong); margin-bottom: 8px; }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   width: 100%; height: 48px; border-radius: var(--r-md); border: 1px solid var(--hairline);
   background: var(--canvas); padding: 0 16px; font-family: var(--font-body); font-size: 0.95rem; color: var(--ink);
   transition: border-color .16s ease, box-shadow .16s ease;
 }
 .field textarea { height: auto; padding: 14px 16px; min-height: 130px; resize: vertical; }
-.field input:focus, .field textarea:focus {
+.field select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  padding-right: 44px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23A8641C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px 8px;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
   outline: none; border-color: var(--amber-deep);
   box-shadow: 0 0 0 3px rgba(168,100,28,0.15);
 }
@@ -718,8 +748,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* ---- Footer ---- */
 .site-footer { background: var(--navy); color: var(--on-navy-soft); padding: 76px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: var(--sp-xxl); padding-bottom: 48px; border-bottom: 1px solid var(--hairline-on-navy); }
-.footer-brand img { height: 42px; margin-bottom: 16px; }
-.footer-brand p { max-width: 34ch; font-size: 0.92rem; }
+.footer-brand img { height: 128px; margin-bottom: 16px; }
 .footer-col h5 { color: var(--on-navy); font-family: var(--font-body); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px; }
 .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
 .footer-col a { font-size: 0.92rem; transition: color .15s ease; }
