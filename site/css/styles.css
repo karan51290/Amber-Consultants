@@ -340,6 +340,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     box-shadow: -12px 0 40px rgba(15,37,68,0.18);
   }
   .mobile-sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .mobile-sheet-logo { height: auto; max-width: 150px; }
   .mobile-sheet .nav-link { font-size: 1.05rem; padding: 14px 6px; border-bottom: 1px solid var(--hairline); border-radius: 0; }
   .mobile-sheet .dropdown-inline { padding-left: 14px; }
   .mobile-sheet .dropdown-inline a { display: block; padding: 10px 6px; font-size: 0.95rem; font-weight: 600; color: var(--muted); }
@@ -348,6 +349,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     z-index: 190; opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease;
   }
   body.nav-open .sheet-backdrop { opacity: 1; visibility: visible; }
+}
+@media (max-width: 640px) {
+  .nav-row { height: 64px; }
+  .brand-mark img { height: auto; max-width: 140px; }
+}
+@media (max-width: 380px) {
+  .brand-mark img { max-width: 110px; }
 }
 @media (min-width: 901px) {
   .mobile-sheet, .sheet-backdrop, .mobile-sheet-header { display: none; }
