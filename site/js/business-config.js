@@ -6,13 +6,14 @@ window.AMBER_BUSINESS = {
   "googleMapsQuery": "No.22,+Shanmuganar+Salai,+Choolaimedu,+Chennai+600094",
   "phone": "+91 98401 46646",
   "landline": "044-4352 8945",
-  "whatsappNumber": "919840146646",
+  "whatsappNumber": "919751037915",
+  "whatsappDisplay": "+91 97510 37915",
   "whatsappMessage": "Hi Amber Consultants, I'd like to know more",
   "email": "care@amberconsultants.in",
   "hours": "Mon-Sat, 9:00 AM - 7:00 PM",
   "social": {
-    "facebook": "https://www.facebook.com/share/1B9r8QbCzq/",
-    "instagram": "https://www.instagram.com/amberconsultants.123",
+    "facebook": "https://www.facebook.com/share/1J3Y9uXd5F/",
+    "instagram": "https://www.instagram.com/amberpropertysolutions/",
     "linkedin": "https://www.linkedin.com/in/amber-consultants-68a04a348/"
   },
   "sanityStudioUrl": "https://amber-consultants.sanity.studio/",

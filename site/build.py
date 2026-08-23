@@ -19,10 +19,11 @@ NAV_ITEMS = [
         ("real-estate.html", "Real Estate"),
         ("renovation-repairs.html", "Building Renovation"),
         ("interior-design.html", "Interior Design"),
+        ("farmland-plot-management.html", "Farmland & Plot Management"),
     ]),
     ("gallery", "Gallery", "gallery.html", None),
     ("listings", "Listings", "listings.html", None),
-    ("sell", "Sell/Rent", "sell.html", None),
+    ("sell", "Buy/Sell/Rent", "sell.html", None),
 ]
 
 # Single source of truth for business details — edit business.json and re-run
@@ -51,6 +52,7 @@ LANDLINE_TEL = tel_href(BUSINESS["landline"])
 # Tokens usable inside pages/*.html fragments — replaced at build time.
 FRAGMENT_TOKENS = {
     "{{WHATSAPP_URL}}": WHATSAPP_URL,
+    "{{WHATSAPP}}": f'<a href="{WHATSAPP_URL}" target="_blank" rel="noopener">{BUSINESS["whatsappDisplay"]}</a>',
     "{{PHONE_TEL}}": PHONE_TEL,
     "{{PHONE}}": f'<a href="tel:{PHONE_TEL}">{BUSINESS["phone"]}</a>',
     "{{LANDLINE}}": f'<a href="tel:{LANDLINE_TEL}">{BUSINESS["landline"]}</a>',
@@ -103,6 +105,15 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
     return f"""<!doctype html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-330VSJJQL7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+
+  gtag('config', 'G-330VSJJQL7');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} | Amber Consultants</title>
@@ -137,7 +148,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
 <div class="sheet-backdrop"></div>
 <aside class="mobile-sheet">
   <div class="mobile-sheet-header">
-    <img src="assets/logos/logo-primary-horizontal.png" alt="Amber Consultants" style="height:64px;">
+    <img src="assets/logos/logo-primary-horizontal.png" alt="Amber Consultants" class="mobile-sheet-logo">
     <button class="nav-toggle" aria-label="Close menu"><span></span></button>
   </div>
   <ul>
@@ -184,6 +195,7 @@ def render_shell(title, description, active_key, body, og_image="assets/images/H
           <li><a href="real-estate.html">Real Estate</a></li>
           <li><a href="renovation-repairs.html">Building Renovation</a></li>
           <li><a href="interior-design.html">Interior Design</a></li>
+          <li><a href="farmland-plot-management.html">Farmland &amp; Plot Management</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -229,9 +241,10 @@ PAGES = [
     ("real-estate.html", "Real Estate", "Buy, sell, and rent residential and commercial property in Chennai with expert guidance from Amber Consultants.", "services"),
     ("renovation-repairs.html", "Building Renovation", "Painting, electrical, plumbing, and full renovation work for homes and commercial spaces in Chennai.", "services"),
     ("interior-design.html", "Interior Design", "Residential and commercial interior design in Chennai - modular kitchens, renovations, and complete home transformations.", "services"),
+    ("farmland-plot-management.html", "Farmland & Plot Management", "Farmland and open plot management in and around Chennai - site visits, boundary and encroachment checks, upkeep, and caretaking for absentee owners.", "services"),
     ("gallery.html", "Gallery", "A look at Amber Consultants' interior design and property work.", "gallery"),
     ("listings.html", "Listings", "Property listings from Amber Consultants - browse properties for sale and for rent.", "listings"),
-    ("sell.html", "Sell / Rent Your Property", "List your property with Amber Consultants - tell us about it and we'll help you sell or rent it.", "sell"),
+    ("sell.html", "Buy / Sell / Rent Your Property", "List your property with Amber Consultants - tell us about it and we'll help you buy, sell, or rent it.", "sell"),
     ("contact.html", "Contact Us", "Get in touch with Amber Consultants - call, WhatsApp, or send us your property management enquiry.", "contact"),
 ]
 
